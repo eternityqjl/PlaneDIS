@@ -15,8 +15,12 @@ from AircraftType import *
 每个page： url_page = url_0 + 'ATR' + '/' + '%s'%each_AircraftType + '?' + 'page=%d'%each_page_num
 每张图片的详情页： url_photo
 图片CDN链接： img_url = bf.find('div', class_='photo_large__container').find('img').get('src')
-
 parse_page -> parse_picturePage -> download
+"""
+
+"""
+能够检测已经下载的图片，根据图片数量跳过下载该类型图片
+测试a22033202030
 
 """
 
