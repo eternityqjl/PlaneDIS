@@ -4,7 +4,7 @@ import glob
 import csv
 
 #direc = listdir(path='/home/eternityqjl/vscode/PlaneDIS/dataset/*/*')
-path = glob.glob('/home/eternityqjl/vscode/PlaneDIS/dataset/*/*')
+path = glob.glob('/home/eternityqjl/vscode/PlaneDIS/dataset/*/*/*.csv')
 print(path)
 
 

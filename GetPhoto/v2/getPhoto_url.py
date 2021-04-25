@@ -8,6 +8,13 @@ import csv
 #导入其他模块
 from proxySetting import *
 from AircraftType import *
+
+"""
+先获取所有图片的url然后再依次下载
+1. 检测图片文件和csv文件的对应关系, 删除不存在图片的csv信息
+2. 从上次中断的地方重新开始下载
+"""
+
 #----------------------------创建存放图片的文件夹----------------------------------------------------------------------------
 def mkdir(path, each_AircraftType):
     folder = os.path.exists(path)   #判断路径文件夹是否存在的变量
