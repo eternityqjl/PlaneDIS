@@ -9,16 +9,7 @@ import csv
 from proxySetting import *
 from AircraftType import *
 
-"""
-各个url变量：
-网站初始量： url_0 = 'https://www.planespotters.net/photos/aircraft/'
-每个page： url_page = url_0 + 'ATR' + '/' + '%s'%each_AircraftType + '?' + 'page=%d'%each_page_num
-每张图片的详情页： url_photo
-图片CDN链接： img_url = bf.find('div', class_='photo_large__container').find('img').get('src')
 
-parse_page -> parse_picturePage -> download
-
-"""
 
 #----------------------------创建存放图片的文件夹----------------------------------------------------------------------------
 def mkdir(path, each_AircraftType):
@@ -53,9 +44,7 @@ def csv_write(path, file_name, plane_airline, plane_type):
         csv_write.writerow(data_row)
         f.close()
 #----------------------------------------------------------------------------------------------------------------------------
-
-def reastart_check():
-    
+   
 
 
 #--------------------------------------download-------------------------------------------------------------------
@@ -119,6 +108,15 @@ def parse_page(url_page, path, headers):  #下载一个page的48张图片
         n = n + 1
 #------------------------------------------------------------------------------------------------------------------------------
 
+"""
+各个url变量：
+网站初始量： url_0 = 'https://www.planespotters.net/photos/aircraft/'
+每个page： url_page = url_0 + 'ATR' + '/' + '%s'%each_AircraftType + '?' + 'page=%d'%each_page_num
+每张图片的详情页： url_photo
+图片CDN链接： img_url = bf.find('div', class_='photo_large__container').find('img').get('src')
+
+parse_page -> parse_picturePage -> download
+"""
 
 if __name__ == '__main__':
 #--------------------------------------设置初始化参数-------------------------------------------------------------------------
