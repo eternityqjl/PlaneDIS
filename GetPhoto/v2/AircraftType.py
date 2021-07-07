@@ -1,6 +1,6 @@
 #制造商及机型数据(字典中的key值为获取的page页数)
 
- #已下载机型'A300B2': 3, 'A300B4': 10, 'A300-600': 20, 'A300-600ST': 8, 'A310-200': 6, 
+
 Airbus = {
                         'A310-300': 20,
                         'A318': 20, 'A319': 20, 'A319neo': 1, 'A320-100': 4, 'A320-200': 20, 'A320neo': 20, 'A321-200': 20, 'A321neo': 20,
@@ -33,10 +33,11 @@ COMAC = {'ARJ21': 4, 'C919': 1}
 McDonnell_Douglas = {'MD-80': 20, 'MD-11': 20}
 Embraer = {'ERJ-145': 20, 'ERJ-170': 20, 'ERJ-190': 20}
 
+#所有制造商
 manufacturer = [Airbus, Antonov, ATR, Boeing, Bombardier, De_Havilland_Canada, British_Aerospace, COMAC, McDonnell_Douglas, Embraer]
 
+#制造商名称
 manufacturer_name = ['Airbus', 'Antonov', 'ATR', 'Boeing', 'Bombardier', 'De-Havilland-Canada', 'British-Aerospace', 'COMAC', 'McDonnell-Douglas', 'Embraer']
-
 
 #制造商总数
 num_manu = len(manufacturer)
