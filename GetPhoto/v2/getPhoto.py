@@ -35,12 +35,8 @@ def create_csv(path, each_AircraftType):
 #------------------------------------------------------------------------------------------------------------------------
 
 #------------------------检查该机型文件夹，返回仍需的图片数量和下一张图片的编号-------------------------------------------------------------
-def check(photo_num_origin, path, each_AircraftType):   #所需图片数量, 路径, 机型
+def check(photo_num, path, each_AircraftType):   #所需图片数量, 路径, 机型
 
-    file_num = len([lists for lists in os.listdir(path) if os.path.isfile(os.path.join(path, lists))])  #文件数量
-    photo_num = file_num - 1    #当前实际图片数量
-    photo_num_need = photo_num_origin - photo_num   #仍需图片数量
-    next_serial = photo_num + 1    #下一张图片的编号
 
     #检查csv文件中的行数是否与图片数量相等，不相等则按顺序重新创建
     csv_filename = '%s.csv'%each_AircraftType
@@ -49,7 +45,6 @@ def check(photo_num_origin, path, each_AircraftType):   #所需图片数量, 路
         csv_line_num = len(f.readlines())
     #if photo_num != csv_line_num:
 
-    return photo_num_need, next_serial, photo_num
 #---------------------------------------------------------------------------------------------------------------------------------
 
 #-----------------------------写入一行csv，即一张图片的信息-----------------------------------------------------------------------------
@@ -158,22 +153,20 @@ if __name__ == '__main__':
 
                 file_num = len([lists for lists in os.listdir(path) if os.path.isfile(os.path.join(path, lists))])  #文件数量
                 photo_num = file_num - 1    #当前实际图片数量
+
+                #检查csv文件行数与实际图片数量是否对应相等，不相等则重新写入csv
+
                 if photo_num > photo_num_origin:
                     continue
                 photo_num_need = photo_num_origin - photo_num   #仍需图片数量
                 next_serial = photo_num + 1    #下一张图片的编号
 
-                #通过check获取仍需图片数量以及下一张图片的编号
-                #photo_num_need, next_serial, photo_num = check(photo_num_origin, path, each_AircraftType)
                 page_num_end = int(photo_num_need / 48) + 1
                 page_num_start = int(photo_num / 48) + 1
-                page = list(range(page_num_start, page_num_start+page_num_end+1))
+                page = list(range(page_num_start, page_num_start+page_num_end+1))   #得到所需图片的page范围
 
-                #n = next_serial #每种机型开始的编号数字
                 for each_page_num in page:  #循环所有的page，每个page有48张图片
-                    url_page = url_0 + '%s'%manu + '/' + '%s'%each_AircraftType + '?' + 'page=%d'%each_page_num
+                    url_page = url_0 + '%s'%manu_name + '/' + '%s'%each_AircraftType + '?' + 'page=%d'%each_page_num
                     parse_page(url_page, path, headers, next_serial)   ##下载一个page的48张图片
-
-
 
 #---------------------------------------------------------------------------------------------------------------------------
