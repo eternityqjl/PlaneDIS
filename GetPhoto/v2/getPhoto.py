@@ -56,7 +56,7 @@ def csv_write(path, file_name, plane_airline, plane_type):
         csv_write.writerow(data_row)
         f.close()
 #----------------------------------------------------------------------------------------------------------------------------
-   
+
 
 
 #--------------------------------------download-------------------------------------------------------------------
@@ -139,23 +139,24 @@ if __name__ == '__main__':
     print("The number of Manufacturer: %d."%num_manu)   #打印制造商总数
     print("The number of Aircraft type: %d."%num_all)   #打印机型总数
 
-    for manu in manufacturer:   #所有飞机制造商
-        for manu_name in manufacturer_name:
+    for manu in manufacturer:   #所有飞机制造商，以键值对保存
+        for manu_name in manufacturer_name: #所有飞机制造商的名称
             for each_AircraftType in manu:  #一家制造商的所有机型
-                path = '/home/eternityqjl/vscode/PlaneDIS/dataset/%s/%s'%(manu_name, each_AircraftType)  #机型文件夹路径
+                path = '/home/eternityqjl/projects/PlaneDIS/dataset/%s/%s'%(manu_name, each_AircraftType)  #机型文件夹路径
                 #首先检查该机型文件夹是否创建，csv文件是否创建，若未创建则先进行创建
                 mkdir(path, each_AircraftType)  #创建存放一个具体机型的文件夹
                 create_csv(path, each_AircraftType) #创建每种机型的csv文件
 
                 #根据要获取的图片page数量确定所需图片数量
                 page_num_origin = manu['%s'%each_AircraftType]
-                photo_num_origin = page_num_origin * 48
+                photo_num_origin = page_num_origin * 48     #所需图片数量
 
                 file_num = len([lists for lists in os.listdir(path) if os.path.isfile(os.path.join(path, lists))])  #文件数量
                 photo_num = file_num - 1    #当前实际图片数量
 
                 #检查csv文件行数与实际图片数量是否对应相等，不相等则重新写入csv
 
+                #检查是否已经下载足够数量图片
                 if photo_num > photo_num_origin:
                     continue
                 photo_num_need = photo_num_origin - photo_num   #仍需图片数量
