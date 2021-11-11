@@ -46,4 +46,4 @@ num_manu = len(manufacturer)
 num_all0 = 0
 for each_manu in manufacturer:
     num_all0 += len(each_manu)
-num_all = num_all0
+num_aircraftType = num_all0
