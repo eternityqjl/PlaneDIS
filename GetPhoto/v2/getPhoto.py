@@ -6,7 +6,7 @@ import os
 import csv
 
 #导入其他模块
-from proxySetting import *   #get_proxy, delete_proxy, getHtml
+from proxySetting import getHtml   #get_proxy, delete_proxy, getHtml
 from AircraftType import *
 
 
@@ -37,7 +37,7 @@ def create_csv(path, each_AircraftType):
 #------------------------检查该机型文件夹，返回仍需的图片数量和下一张图片的编号-------------------------------------------------------------
 def check(photo_num, path, each_AircraftType):   #所需图片数量, 路径, 机型
 
-
+    
     #检查csv文件中的行数是否与图片数量相等，不相等则按顺序重新创建
     csv_filename = '%s.csv'%each_AircraftType
     csv_filename_path = path + '/' + csv_filename
