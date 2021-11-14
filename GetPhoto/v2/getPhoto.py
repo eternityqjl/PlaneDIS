@@ -1,7 +1,5 @@
 from bs4 import BeautifulSoup
-import requests
 import re
-import json
 import os
 import csv
 
