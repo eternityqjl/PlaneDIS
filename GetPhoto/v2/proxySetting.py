@@ -21,6 +21,11 @@ def getHtml(url, headers):
     proxies = {'http': 'http://' + proxy}
     return requests.get(url, proxies=proxies, headers=headers).text
 
+def getPics(url, headers):
+    proxy = get_random_proxy()
+    proxies = {'http': 'http://' + proxy}
+    return requests.get(url, proxies=proxies, headers=headers)
+
 """
 #测试代理的代码
 

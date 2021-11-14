@@ -4,7 +4,7 @@ import os
 import csv
 
 #导入其他模块
-from proxySetting import getHtml   #get_proxy, delete_proxy, getHtml
+from proxySetting import getHtml, getPics   #get_proxy, delete_proxy, getHtml
 from AircraftType import *
 
 
@@ -61,7 +61,7 @@ def csv_write(path, file_name, plane_airline, plane_type):
 #参数依次表示：图片链接，机型，航司，注册号，保存路径，图片名称
 def download(img_url, plane_type, plane_airline, plane_reg, path, name):
     img_url1 = r'%s'%img_url
-    req = getHtml(img_url1, headers)   #获取图片
+    req = getPics(img_url1, headers)   #获取图片
 
     file_name = path + r'/' + name  #设置图片路径及名称
     f = open(file_name, 'wb')   #创建文件并写入图片
@@ -75,15 +75,15 @@ def download(img_url, plane_type, plane_airline, plane_reg, path, name):
 #获取每张图片的cdn链接以及图片信息
 def parses_picturePage(url_photo, path, next_serial):
     url_photo = r'https://www.planespotters.net/' + r'%s'%url_photo   #获取图片详情所在网页url
-    img_req = getHtml(url_photo, headers)
-    html = img_req.text
+    html = getHtml(url_photo, headers)
     bf = BeautifulSoup(html, 'lxml')    #下载HTML源代码
     try:
         img_url = bf.find('div', class_='photo_large__container').find('img').get('src')    #获取图片地cdn链接(src)
         img_name = bf.find('div', class_='photo_large__container').find('img').get('alt')   #获取图片的完整名称(alt)
 
-        #从完整名称中提取注册号、机型、航司
+        #使用正则表达式从完整名称中提取注册号、机型、航司
         #re.findall的返回值是列表list，要将其转换为字符串后使用
+        #有些机型有不同名称，要把庞巴迪CS100和CS300改为空客A220-100和A220-300
         plane_reg = re.findall("^(.*?)\s", img_name)    
         plane_reg = "".join(plane_reg)
         #plane_type = re.findall("ATR\s(.+?)\sphotographed", img_name)
@@ -104,8 +104,7 @@ def parses_picturePage(url_photo, path, next_serial):
 #-----------------------------------main_circle---------------------------------------------------------------------------
 def parse_page(url_page, path, headers, next_serial):  #下载一个page的48张图片
     #global n
-    req = getHtml(url_page, headers)    #获取html源代码
-    html = req.text
+    html = getHtml(url_page, headers)    #获取html源代码
     bf = BeautifulSoup(html, 'lxml')    #将html源码转换为BeautifulSoup对象
 
     targets_url = bf.find_all('div', class_='photo_card__grid') #从中提取该页中所有的48张图片的详情页链接
