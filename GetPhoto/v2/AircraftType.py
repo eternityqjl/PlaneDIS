@@ -33,10 +33,10 @@ McDonnell_Douglas = {'MD-80': 20, 'MD-11': 20}
 Embraer = {'ERJ-145': 20, 'ERJ-170': 20, 'ERJ-190': 20}
 
 #所有制造商
-manufacturer = [Airbus, Antonov, ATR, Boeing, Bombardier, De_Havilland_Canada, British_Aerospace, COMAC, McDonnell_Douglas, Embraer]
+#manufacturer = [Airbus, Antonov, ATR, Boeing, Bombardier, De_Havilland_Canada, British_Aerospace, COMAC, McDonnell_Douglas, Embraer]
 
 #制造商名称
-manufacturer_name = ['Airbus', 'Antonov', 'ATR', 'Boeing', 'Bombardier', 'De-Havilland-Canada', 'British-Aerospace', 'COMAC', 'McDonnell-Douglas', 'Embraer']
+manufacturer = {'Airbus':Airbus, 'Antonov':Antonov, 'ATR':ATR, 'Boeing':Boeing, 'Bombardier':Bombardier, 'De-Havilland-Canada':De_Havilland_Canada, 'British-Aerospace':British_Aerospace, 'COMAC':COMAC, 'McDonnell-Douglas':McDonnell_Douglas, 'Embraer':Embraer}
 
 #制造商总数
 num_manu = len(manufacturer)

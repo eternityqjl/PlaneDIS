@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 proxypool_url = 'http://127.0.0.1:5555/random'
+headers0 = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36"}
 
 def get_random_proxy():
     """
@@ -10,7 +11,7 @@ def get_random_proxy():
     """
     return requests.get(proxypool_url).text.strip()
 
-def getHtml(url, headers):
+def getHtml(url):
     """
     use proxy to crawl page
     :param url: page url
@@ -19,12 +20,12 @@ def getHtml(url, headers):
     """
     proxy = get_random_proxy()
     proxies = {'http': 'http://' + proxy}
-    return requests.get(url, proxies=proxies, headers=headers).text
+    return requests.get(url, proxies=proxies, headers=headers0).text
 
-def getPics(url, headers):
+def getPics(url):
     proxy = get_random_proxy()
     proxies = {'http': 'http://' + proxy}
-    return requests.get(url, proxies=proxies, headers=headers)
+    return requests.get(url, proxies=proxies, headers=headers0)
 
 """
 #测试代理的代码
