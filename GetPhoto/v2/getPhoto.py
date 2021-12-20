@@ -67,16 +67,18 @@ def parses_picture(url_photo, path_dir, next_serial, manu_name, aircraftType_nam
         img_name = bf.find('div', class_='photo_large__container').find('img').get('alt')   #获取图片的完整名称(alt)
 
         #使用正则表达式从完整名称中提取注册号、机型、航司
-        #re.findall的返回值是列表list，要将其转换为字符串后使用
         #有些机型有不同名称，要把庞巴迪CS100和CS300改为空客A220-100和A220-300
         plane_reg = "".join(re.findall("^(.*?)\s", img_name))
 
-        if manu_name=='De_Havilland_Canada':
-            plane_airline = "".join(re.findall("\s(.*?)\s%s"%('De-Havilland-Canada'), img_name))
-        if manu_name=='McDonnell_Douglas':
-            plane_airline = "".join(re.findall("\s(.*?)\s%s"%('McDonnell-Douglas'), img_name))
-        if manu_name=='British_Aerospace':
-            plane_airline = "".join(re.findall("\s(.*?)\s%s"%('British-Aerospace'), img_name))
+        if manu_name=='De-Havilland-Canada':
+            plane_airline = "".join(re.findall("\s(.*?)\s%s"%('De Havilland Canada'), img_name))
+        elif manu_name=='McDonnell-Douglas':
+            plane_airline = "".join(re.findall("\s(.*?)\s%s"%('McDonnell Douglas'), img_name))
+        elif manu_name=='British-Aerospace':
+            plane_airline = "".join(re.findall("\s(.*?)\s%s"%('British Aerospace'), img_name))
+        elif (aircraftType_name=='A220-100') or (aircraftType_name=='A220-300'):
+            plane_airline = re.findall("\s(.*?)\s(Airbus|Bombardier)", img_name)
+            plane_airline = plane_airline[0][0]
         else:
             plane_airline = "".join(re.findall("\s(.*?)\s%s"%manu_name, img_name))
 
@@ -136,7 +138,7 @@ def main_process(manu_name, AircraftType_name, page_num):
     next_serial = photo_num + 1    #下一张图片的编号
 
     #得到所需图片的page范围
-    page_num_end = int(photo_num_origin / 48) + 2
+    page_num_end = int(photo_num_origin / 48) + 1
     page_num_start = int(photo_num / 48) + 2
     page = list(range(page_num_start, page_num_end+1))   
 
@@ -169,7 +171,7 @@ if __name__ == '__main__':
 
     para = [[p[0] for p in list0], [p[1] for p in list0], [p[2] for p in list0]]
 
-    #main_process("Bombardier", "CRJ-700", 20)
+    #main_process("Airbus", "A220-300", 20)
 
     with ProcessPool(nodes=15) as pool:
         result = pool.map(main_process, para[0], para[1], para[2])
